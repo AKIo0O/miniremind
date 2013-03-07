@@ -13,58 +13,9 @@ block content
                 td.title 
                     input(type="text")
                 td.time
-                    input(type="text").input-supermini
+                    input(type="number").input-supermini
                 td
                     input(type="submit",value="添加").btn
     script(src="/javascripts/notify.js")
-    script
-        (function(){
-            var storage = window.localStorage;
-
-            var key = storage["index"] || 0;
-
-            var append = function(o){
-                $("<tr><td>"+i+"</td><td>"+o.title+"</td><td>"+o.time+"分</td><td><a href='#' class='del'>delete</a></td></tr>").insertBefore(".addMore");
-            };
-
-            $("input[type='submit']").on("click", function(){
-                var o = {};
-                o.title = $(".title>input").val();
-                o.time  = $(".time").html();
-
-                var date = new Date();
-
-                o.start = date.getHours()+":";
-                storage[++key] = JSON.stringify(o);
-                storage["index"] = key;
-                append(o);
-            });
-
-            for(var i = 1; i <= key; i++){
-                var o = JSON.parse(storage[i]);
-                if(o == null) continue;
-                append(o);
-            }
-
-            $(".table").on("click", ".del", function(){
-                var key = $(this).parent().parent().find("td:first").html();
-                console.log($(this).parent().parent())
-                storage[key]="null";
-                $(this).parent().parent().remove();
-                return false;
-            });
-
-            setInterval(function(){
-
-
-
-
-
-
-
-
-            },1000)
-
-        })();
        
 
